@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Software Engineer',
+    date: 'Nov 7 2019',
+    firstParagraph: 'This is my first test paragraph. It wont be that long.',
+    secondParagraph: 'This is my second test paragraph. First paragraph felt short, so I added more.',
+    thirdParagraph: 'This is my third test paragraph. Only for testing, nothing else I promise.'
   }
 ];
 
@@ -105,10 +112,54 @@ const data = [
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
-  Step 3: return the entire component.
+  Step 3: return the entire componentf
 
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+ // Creating Structure
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+  const div = document.createElement('div');
+  const title1 = document.createElement('h2');
+  const date1 = document.createElement('p');
+  const par1 = document.createElement('p');
+  const par2 = document.createElement('p');
+  const par3 = document.createElement('p');
+  const exbtn = document.createElement('span');
+
+  // appending DOM
+  div.append(title1, date1, par1, par2, par3, exbtn);
+
+  // ### Class
+  div.classList.add('article');
+  date1.classList.add('date');
+  exbtn.classList.add('expandButton');
+
+  // ### Button Event Handler
+  exbtn.addEventListener('click', () => {
+    div.classList.toggle('article-open');
+  })
+
+ // ### content set
+  title1.textContent = title;
+  date1.textContent = date;
+  par1.textContent = firstParagraph;
+  par2.textContent = secondParagraph;
+  par3.textContent = thirdParagraph;
+  exbtn.textContent = 'open';
+
+  // ### Classes Added
+
+  return div;
+ 
+}
+
+const parentComponent = document.querySelector('.articles');
+data.forEach(a => {
+  const newArticle = createArticle(a.title, a.date, a.firstParagraph, a.secondParagraph, a.thirdParagraph)
+  parentComponent.append(newArticle);
+})
+
+
